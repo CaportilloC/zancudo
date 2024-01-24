@@ -1,0 +1,61 @@
+﻿@model zancudo.Entidades.ClienteDisfraz
+<script src="~/js/validation.js"></script>
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-Dark">Actualizar Servicio</h6>
+        </div>
+        <div class="card-body">
+            <div class="col-sm-12">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="ClienteId" class="control-label"></label>
+                            <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                            <span asp-validation-for="ClienteId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DisfrazId" class="control-label"></label>
+                            <select asp-for="DisfrazId" class="form-control" asp-items="ViewBag.DisfrazId"></select>
+                            <span asp-validation-for="DisfrazId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FechaInicio" class="control-label"></label>
+                            <input asp-for="FechaInicio" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" onchange="validateDates()" />
+                            <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FechaFin" class="control-label"></label>
+                            <input asp-for="FechaFin" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" onchange="validateDates()" />
+                            <span asp-validation-for="FechaFin" class="text-danger"></span>
+                        </div>
+                        <div id="dateError" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="TipoPagoId" class="control-label"></label>
+                            <select asp-for="TipoPagoId" class="form-control" asp-items="ViewBag.TipoPagoId"></select>
+                            <span asp-validation-for="TipoPagoId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Save" class="btn btn-outline-primary" />
+                        <button id="backToList" type="button" class="btn btn-outline-danger" onclick="window.location.href='@Url.Action("Index", "ClientesDisfraces")'">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

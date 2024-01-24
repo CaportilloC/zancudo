@@ -1,0 +1,44 @@
+﻿@model zancudo.Entidades.Disfraz
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-second-primary">
+            <h6 class="m-0 font-weight-bold text-Dark">Crear Nuevo Disfraz</h6>
+        </div>
+        <div class="card-body">
+            <div class="col-sm-12">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label">Nombre del disfraz</label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TipoDisfrazId" class="control-label">Tipo</label>
+                            <select asp-for="TipoDisfrazId" class="form-control" asp-items="ViewBag.TipoDisfrazId"></select>
+                            <span asp-validation-for="TipoDisfrazId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Save" class="btn btn-outline-primary" />
+                        <button id="backToList" type="button" class="btn btn-outline-danger" onclick="window.location.href='@Url.Action("Index", "Disfraces")'">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
